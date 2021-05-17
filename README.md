@@ -23,6 +23,8 @@ Combines together all of the split-up data for models, model inputs, and databas
 ### generate_ground_truths.py
 
 #### Usage: 
+python generate_ground_truths.py
+
 no additional command line arguments 
 
 #### Description: Combines the broken up DMOZ (https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/OMV93V) and Shalla List (https://www.shallalist.de/) URL-category data sets together, 
@@ -33,7 +35,7 @@ and fetches the latest URL popularity data from Tranco (https://tranco-list.eu/)
 #### Usage: 
 python write_to_database.py (dataset) 
 
-where (dataset) should be either 'dmoz' or 'shalla'
+(dataset) should be either 'dmoz' or 'shalla'
 
 #### Description: 
 Creates a database if one doesn't already exist, and a table for the specified data set. Fetches site content for specified data set and writes to database. The database content is retrieved in build_model_full.py for constructing the model. 
@@ -43,7 +45,7 @@ Creates a database if one doesn't already exist, and a table for the specified d
 #### Usage: 
 python build_model_url.py (dataset) 
 
-where (dataset) should be either 'dmoz' or 'shalla'
+(dataset) should be either 'dmoz' or 'shalla'
 
 #### Description: 
 Creates a URL-feature-only classifier for the specified data set through an sklearn pipeline using Multinomial Naive Bayes and parameter-tuned using a Randomized Search Cross-validation. Uses keras for GPU-boosting if applicable. 
@@ -53,7 +55,7 @@ Creates a URL-feature-only classifier for the specified data set through an skle
 #### Usage: 
 python build_model_full.py (dataset) 
 
-where (dataset) should be either 'dmoz' or 'shalla'
+(dataset) should be either 'dmoz' or 'shalla'
 
 #### Description: 
 Creates a classifier for the specified data set through an sklearn pipeline using CountVectorizer, Tf-idf, and Random Forest Classifier that reads in the stored URL web content in the database (previously written to by the write_to_database.py script) and generates features described in the file. Additionally saves this model and model input to the /models/ subdirectory for ease of access. 
@@ -63,13 +65,29 @@ Creates a classifier for the specified data set through an sklearn pipeline usin
 #### Usage: 
 python classify.py (dataset) (model) (input) (output) ... 
 
-(dataset) should be 'shalla' or 'dmoz'
+(dataset) should be either 'dmoz' or 'shalla'
 (model) should be 'url' or 'full'
 (output) should be either 'y' indicating save the output to a file in the same directory, or 'n' indicating to simply print the results to stdout
 (input) should similarly be 'y' or 'n', with 'y' indicating the URLs to be classified will be provided in a .csv file in the same directory, whose name will be the last argument in the command line. If 'n', then the remaining inputs on the command line should be the URLs to be classified.
 
 #### Description: 
 
+The primary tool created during this project. Performs classification using the specified data set and model, with options to read / save to file, or read from command line / output to stdout. 
 
+## Optional Files: 
 
+### hyperparameter_tuning.py 
+
+#### Usage: 
+python hyperparameter_tuning.py (dataset) 
+
+(dataset) should be either 'dmoz' or 'shalla'
+
+#### Description: 
+Uses multicore Randomized Search CV to find the optimal parameters for the full models for the specified data set. Saves the output to a file for access. Includes functionality for a further GridSearch. 
+
+### Classifier Models.ipynb 
+
+#### Description: 
+Details the process of testing the various models, vocabulary generation, etc. Includes visual classification reports and confusion matrices for the results. 
 
