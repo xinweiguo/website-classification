@@ -231,7 +231,7 @@ if __name__ == "__main__":
     (output) should be either 'y' indicating save the output to a file in the same directory, or 'n' indicating
     to simply print the results to stdout\n
     (input) should similarly be 'y' or 'n', with 'y' indicating the URLs to be classified will be provided in a .csv file in the same directory, whose name
-    will be the last argument in the command line. If 'no', then the remaining inputs on the command line should be the URLs to be classified.
+    will be the last argument in the command line. If 'n', then the remaining inputs on the command line should be the URLs to be classified.
     """
 
     which_list = '' 
