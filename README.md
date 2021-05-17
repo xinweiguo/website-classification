@@ -58,7 +58,17 @@ where (dataset) should be either 'dmoz' or 'shalla'
 #### Description: 
 Creates a classifier for the specified data set through an sklearn pipeline using CountVectorizer, Tf-idf, and Random Forest Classifier that reads in the stored URL web content in the database (previously written to by the write_to_database.py script) and generates features described in the file. Additionally saves this model and model input to the /models/ subdirectory for ease of access. 
 
+### classify.py 
 
+#### Usage: 
+python classify.py (dataset) (model) (input) (output) ... 
+
+(dataset) should be 'shalla' or 'dmoz'
+(model) should be 'url' or 'full'
+(output) should be either 'y' indicating save the output to a file in the same directory, or 'n' indicating to simply print the results to stdout
+(input) should similarly be 'y' or 'n', with 'y' indicating the URLs to be classified will be provided in a .csv file in the same directory, whose name will be the last argument in the command line. If 'n', then the remaining inputs on the command line should be the URLs to be classified.
+
+#### Description: 
 
 
 
